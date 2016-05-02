@@ -1,7 +1,10 @@
 var webpack = require('webpack');
 var extend = require('util')._extend;
-var fs = require('fs');
 var path = require('path');
+var MemoryFS = require("memory-fs");
+var fs = new MemoryFS();
+
+var TMP_PATH = '/tmp';
 
 var renderer = function(data, options, callback) {
 
@@ -10,23 +13,43 @@ var renderer = function(data, options, callback) {
     hexo.config.webpack || {}
   );
 
-  if (data.path !== process.cwd() + '/' + userConfig.entry) return callback(null, data.text);
+  //
+  // If this file is not a webpack entry simply return the file.
+  //
+  if (data.path !== path.join(process.cwd(), userConfig.entry)) {
+    return callback(null, data.text);
+  }
 
+  //
+  // Copy config then extend it with some defaults.
+  //
   var config = extend({}, userConfig);
 
   config = extend(config, {
-    entry: process.cwd() + '/' + userConfig.entry,
+    entry: path.join(process.cwd(), userConfig.entry),
     output: {
-      path: hexo.config.public_dir + '/js-webpack',
+      path: TMP_PATH,
       filename: path.basename(data.path),
     }
   });
 
+  //
+  // Setup compiler to use in-memory file system then run it.
+  //
   var compiler = webpack(config);
+  compiler.outputFileSystem = fs;
 
   compiler.run(function(err, stats) {
-    if (stats.toJson().errors.length > 0) return callback(stats.toJson().errors, 'Webpack Error.')
-    return callback(null, data.text);
+    var output = compiler.options.output;
+    var outputPath = path.join(output.path, output.filename);
+
+    if (stats.toJson().errors.length > 0) {
+      hexo.log.log(stats.toString());
+      return callback(stats.toJson().errors, 'Webpack Error.');
+    }
+
+    contents = fs.readFileSync(outputPath).toString();
+    return callback(null, contents);
   });
 
 };

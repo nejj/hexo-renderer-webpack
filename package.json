@@ -1,6 +1,6 @@
 {
   "name": "hexo-renderer-webpack",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Webpack renderer plugin for Hexo",
   "main": "index",
   "repository": {
@@ -21,6 +21,7 @@
     "url": "https://raw.github.com/briangonzalez/hexo-renderer-webpack/master/LICENSE"
   },
   "dependencies": {
+    "memory-fs": "^0.3.0",
     "webpack": "^1.13.0"
   }
 }
