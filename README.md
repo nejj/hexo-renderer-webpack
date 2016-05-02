@@ -19,5 +19,5 @@ webpack:
 
 ## Links
 
-[Hexo]: https://hexo.io/
-[Webpack]: http://webpack.github.io/
+- Hexo: https://hexo.io/
+- Webpack: http://webpack.github.io/
