@@ -5,10 +5,10 @@
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bmats/hexo-renderer-webpack.git"
+    "url": "https://github.com/briangonzalez/hexo-renderer-webpack.git"
   },
   "bugs": {
-    "url": "https://github.com/bmats/hexo-renderer-webpack/issues"
+    "url": "https://github.com/briangonzalez/hexo-renderer-webpack/issues"
   },
   "keywords": [
     "hexo",
@@ -18,7 +18,7 @@
   "author": "Brian Gonzalez (https://github.com/briangonzalez)",
   "license": {
     "type": "MIT",
-    "url": "https://raw.github.com/bmats/hexo-renderer-webpack/master/LICENSE"
+    "url": "https://raw.github.com/briangonzalez/hexo-renderer-webpack/master/LICENSE"
   },
   "dependencies": {
     "webpack": "^1.13.0"
