@@ -1,10 +1,11 @@
 var webpack = require('webpack');
 var extend = require('util')._extend;
 var path = require('path');
+var os = require('os');
 var MemoryFS = require("memory-fs");
 var fs = new MemoryFS();
 
-var TMP_PATH = '/tmp';
+var TMP_PATH = os.tmpdir();
 
 var renderer = function(data, options, callback) {
 
