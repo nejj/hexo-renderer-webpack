@@ -1,8 +1,9 @@
+var _ = require('lodash');
 var webpack = require('webpack');
 var extend = require('util')._extend;
-var path = require('path');
 var os = require('os');
-var MemoryFS = require("memory-fs");
+var path = require('path');
+var MemoryFS = require('memory-fs');
 var fs = new MemoryFS();
 
 var TMP_PATH = os.tmpdir();
@@ -14,10 +15,26 @@ var renderer = function(data, options, callback) {
     hexo.config.webpack || {}
   );
 
+  var cwd = process.cwd();
+
+  //
+  // Convert config of the entry to object.
+  //
+  userConfig.entry = (function(entry) {
+    if (_.isString(entry)) entry = [entry];
+    if (_.isArray(entry)) {
+      entry = entry.map(function(x){return path.join(cwd, x)});
+      return _.zipObject(entry.map(function(x){
+        return path.basename(x, path.extname(x));
+      }), entry);
+    }
+    return _.mapValues(entry, function(x){return path.join(cwd, x)});
+  })(userConfig.entry);
+
   //
   // If this file is not a webpack entry simply return the file.
   //
-  if (data.path !== path.join(process.cwd(), userConfig.entry)) {
+  if (!_.includes(userConfig.entry, data.path)) {
     return callback(null, data.text);
   }
 
@@ -27,10 +44,10 @@ var renderer = function(data, options, callback) {
   var config = extend({}, userConfig);
 
   config = extend(config, {
-    entry: path.join(process.cwd(), userConfig.entry),
     output: {
+      entry: data.path,
       path: TMP_PATH,
-      filename: path.basename(data.path),
+      filename: path.basename(data.path)
     }
   });
 
