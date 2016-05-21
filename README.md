@@ -1,6 +1,6 @@
 # hexo-renderer-webpack
 
-Add [Hexo] support for [Webpack].
+Add Hexo support for Webpack.
 
 ## Install
 
@@ -15,6 +15,15 @@ You can configure this plugin in `_config.yml` or your theme's `_config.yml`.
 ``` yaml
 webpack:
   entry: 'themes/my-theme/source/js/app.js'
+```
+
+or
+
+``` yaml
+webpack:
+  entry:
+    - 'themes/my-theme/source/js/app.js'
+    - 'themes/my-theme/source/js/lib.js'
 ```
 
 ## Links
