@@ -24,9 +24,7 @@ var renderer = function(data, options, callback) {
     if (_.isString(entry)) entry = [entry];
     if (_.isArray(entry)) {
       entry = entry.map(function(x){ return path.join(cwd, x); });
-      return _.zipObject(entry.map(function(x){
-        return path.basename(x, path.extname(x));
-      }), entry);
+      return _.zipObject(entry, entry);
     }
     return _.mapValues(entry, function(x){ return path.join(cwd, x); });
   })(userConfig.entry);
