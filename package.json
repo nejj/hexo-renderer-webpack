@@ -1,14 +1,14 @@
 {
   "name": "hexo-renderer-webpack",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Webpack renderer plugin for Hexo",
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/briangonzalez/hexo-renderer-webpack.git"
+    "url": "https://github.com/nejj/hexo-renderer-webpack.git"
   },
   "bugs": {
-    "url": "https://github.com/briangonzalez/hexo-renderer-webpack/issues"
+    "url": "https://github.com/nejj/hexo-renderer-webpack/issues"
   },
   "keywords": [
     "hexo",
@@ -18,7 +18,7 @@
   "author": "Brian Gonzalez (https://github.com/briangonzalez)",
   "license": {
     "type": "MIT",
-    "url": "https://raw.github.com/briangonzalez/hexo-renderer-webpack/master/LICENSE"
+    "url": "https://raw.github.com/nejj/hexo-renderer-webpack/master/LICENSE"
   },
   "dependencies": {
     "lodash": "^4.12.0",
